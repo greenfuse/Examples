@@ -1,7 +1,15 @@
+#!/usr/bin/python3
+'''
+This is an example of tkinter drag n drop within and between treeviews.
+Created to help me understand how to do it for a bigger project.
+Try to keep things clear and explicit so I can understand it later.
+Uses the tkinter dnd module rather than any third-party module.
+It is a bit hackish but gets the job done.
+'''
+
 import tkinter as tk
 import tkinter.ttk as ttk
 from tkinter import dnd
-import pprint
 
 class TreeviewDnD:
     def __init__(self, master):
@@ -144,9 +152,11 @@ class TreeviewDnD:
         '''
         # set to zero then check if a row is selected for dragging
         self.drag_row = 0
+        # if dnd_motion is triggered then change this to 1
         self.moved = 0
+        
+        #check if we have picked up a row
         if dnd.dnd_start(self, event):
-            #print("here we go!")
             widget=event.widget
             widget._drag_start_x = event.x
             widget._drag_start_y = event.y
@@ -180,15 +190,13 @@ class TreeviewDnD:
         in this case it is moving a blank label to indicate dragging
         '''
         widget = event.widget
-        row = widget.identify_row(event.y)
-        row_item = widget.item(row)
-        row_text = row_item['text']
         # only move if there is a row selected
         if self.drag_row:
             row_width = widget.winfo_width()        
+            #the default row height seems to be 20
+            #can set this in the tree style if necessary
             win_x = widget.winfo_x()  - widget._drag_start_x + event.x
             win_y = widget.winfo_y() - 10 + event.y
-            #print("row width is: " + str(row_width))
             row_height = 20
             self.label_drag.lift()
             self.label_drag.place(x = win_x, y = win_y, width=row_width, height= row_height)
@@ -213,9 +221,10 @@ class TreeviewDnD:
     def dnd_end(self, target, event):
         '''
         action to take on mouse release after drag
+        get the destination and source treeview widgets
+        pass to a function to do the move
         '''
         self.label_drag.place_forget()
-        #print("dropped")
         x = self.master.winfo_pointerx()
         y = self.master.winfo_pointery()
         source_treeview = event.widget
@@ -237,10 +246,10 @@ class TreeviewDnD:
         '''
         source_selected_item = source_treeview.focus()
         #print("source_selected_item: " + source_selected_item)
-        
         source_row_item = source_treeview.item(source_selected_item)
         #print("source_row_item: " + str(source_row_item))
-        
+        # identify the destination row and use the index to 
+        # position a new row to be created from the dragged one
         y = (self.master.winfo_pointery()) - (destination_treeview.winfo_rooty())
         destination_row = destination_treeview.identify_row(y)
         destination_row_details = destination_treeview.item(destination_row)
