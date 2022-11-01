@@ -5,6 +5,9 @@ import pprint
 
 class TreeviewDnD:
     def __init__(self, master):
+        '''
+        create treeviews and add some rows
+        '''
         self.master = master
         master.title("Treeview DND Test")
         master.minsize(840, 420)
@@ -159,7 +162,6 @@ class TreeviewDnD:
     def dnd_leave(self, source, event):
         '''
         called by the dnd module when leaving the original widget
-        not of any use in this example
         '''
         #print("leave")
         pass
@@ -168,7 +170,6 @@ class TreeviewDnD:
         '''
         called by the dnd module when starting the drag
         or moving to a new widget
-        not of any use in this example
         '''
         #print("enter")
         pass
@@ -205,7 +206,7 @@ class TreeviewDnD:
         possibly called by the dnd module when the drag is released 
         over an accepting widget
         but does not behave consistently
-        not of any use in this example
+        can't see any use for it in this example
         '''
         pass
 
@@ -261,17 +262,6 @@ class TreeviewDnD:
             )        
 
         source_treeview.delete(source_selected_item)
-        
-        '''
-        #recalibrate the following rows with new index
-        if row_index != 'end':
-            next_row = source_treeview.next(previous_row)
-            row_index += 1
-            while next_row or row_index < 10:
-                destination_treeview.item(next_row, index=row_index)
-                row_index += 1
-        '''
-
 
 root = tk.Tk()
 tvdnd = TreeviewDnD(root)
