@@ -10,6 +10,8 @@ Get and set the position of a slider in gtk4
 ### gst_player.py
 Basic player for audio file with slider. Gstreamer 1.0 and Gtk 4.0
 
-
 ### gtk4_tree_columns.py
 Use the new gtk4 classes for an expandable list with columns
+
+### gtk4_dialog.py
+Open a basic dialog with text labels and close button.
