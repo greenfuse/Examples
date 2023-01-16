@@ -11,17 +11,16 @@ class DialogWindow(Gtk.Dialog):
         text
         ):
         super().__init__(transient_for = parent)
-        #print(transient_for)
-        
-        #self.transient_for = transient_for
-
-        #self.text = text        
         self.title="Song Details", 
         self.use_header_bar = True
         self.connect('response', self.dialog_response)
 
         self.set_modal(True)
         self.add_button("Close", Gtk.ResponseType.CLOSE)
+        
+        btn_close = self.get_widget_for_response(
+            response_id=Gtk.ResponseType.CLOSE,
+        )
 
         label1 = Gtk.Label()
         label1.set_text("This is a dialog window")
@@ -39,8 +38,8 @@ class DialogWindow(Gtk.Dialog):
         label2.set_margin_top(5)
         self.get_content_area().append(label2)
 
-    def dialog_response(self, dialog, response):  
-        if dialog.response == Gtk.ResponseType.CLOSE:
+    def dialog_response(self, dialog, response): 
+        if response == Gtk.ResponseType.CLOSE:
             print('pressed the CLOSE button')
         dialog.close()     
 
@@ -81,13 +80,12 @@ class AppWindow(Gtk.ApplicationWindow):
 
     def on_dialog_clicked(self, button):
         song_dialog = DialogWindow(self, self.text)
-        self.set_transient_for = DialogWindow
         song_dialog.present()
 
 def on_activate(app):
     win = AppWindow(app)
     win.present()
 
-app = Gtk.Application(application_id='com.zetcode.Simple')
+app = Gtk.Application(application_id='com.example.dialog')
 app.connect('activate', on_activate)
 app.run(None)
