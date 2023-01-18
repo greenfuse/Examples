@@ -62,7 +62,8 @@ class AppWindow(Gtk.ApplicationWindow):
         label = Gtk.Label(
             margin_top = 2,
             margin_start = 8,
-            margin_end = 8
+            margin_end = 8,
+            halign = Gtk.Align.START
             )
         item.set_child(label)
 
