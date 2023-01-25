@@ -19,3 +19,5 @@ Open a basic dialog with text labels and close button.
 ### gtk4_listview.py
 Use the new gtk4 classes for a list with rows that have two lines of text.
 
+### gtk3_list_dnd.py
+Drag and Drop to copy a row between two lists or move within a list.
