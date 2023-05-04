@@ -21,3 +21,6 @@ Use the new gtk4 classes for a list with rows that have two lines of text.
 
 ### gtk3_list_dnd.py
 Drag and Drop to copy a row between two lists or move within a list.
+
+### gtk3_expand_align.py
+Show the effect of different sizing options
